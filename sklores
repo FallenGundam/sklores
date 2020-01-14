@@ -1,0 +1,241 @@
+
+	
+	
+	
+	
+on skript load:
+	send "&7[&d&lSKLORES&7] &2讀取成功!" to console 
+	send "&7[&d&lSKLORES&7] &eby gundam89412 &a感謝你的使用!" to console 
+
+command /setname [<text>]:
+	Executable by: players
+	Permission: sklores.admin
+	permission message: &7[&d&lSKLORES&7] &c你沒權限使用此指令!
+	trigger:
+		if arg-1 is set:
+			if player's tool is not air:
+				set name of player's tool to arg-1
+				replace every "&" with "§" in name of player's tool
+				send "&7[&d&lSKLORES&7] &a成功添加!" to player
+			else:
+				send "&7[&d&lSKLORES&7] &c請手持一個物品!"
+command /loreadd [<text>]:
+	Executable by: players
+	Permission: sklores.admin
+	permission message: &7[&d&lSKLORES&7] &c你沒權限使用此指令!
+	trigger:
+		if arg-1 is set:
+			if player's tool is not air:
+				set lore of player's tool to "%lore of player's tool%||%arg-1%"
+				replace all "&" with "§" in lore of player's tool
+				send "&7[&d&lSKLORES&7] &a成功添加!" to player
+			else:
+				send "&7[&d&lSKLORES&7] &c請手持一個物品!"	
+command /e [<text>] [<text>] [<text>]:
+	Executable by: players
+	Permission: sklores.admin
+	permission message: &7[&d&lSKLORES&7] &c你沒權限使用此指令!
+	trigger:
+		if arg-1 is "clear":
+			if player isn't holding air:
+				disenchant the player's tool
+			else:
+				send "&7[&d&lSKLORES&7] &c請手持一個物品!"
+		if arg-1 is "list":
+			set {_enchant::0} to protection 
+			set {_enchant::1} to fire protection
+			set {_enchant::2} to feather falling
+			set {_enchant::3} to blast protection
+			set {_enchant::4} to projectile protection
+			set {_enchant::5} to respiration
+			set {_enchant::6} to aqua affinity
+			set {_enchant::7} to thorns
+			set {_enchant::8} to Depth Strider 
+			set {_enchant::9} to Frost Walker
+			set {_enchant::10} to Curse of Binding
+			set {_enchant::11} to Curse of Vanishing
+			set {_enchant::16} to Sharpness
+			set {_enchant::17} to Smite
+			set {_enchant::18} to Bane Of Arthropods
+			set {_enchant::19} to Knockback
+			set {_enchant::20} to Fire Aspect
+			set {_enchant::21} to Looting
+			set {_enchant::22} to Sweeping Edge
+			set {_enchant::32} to Efficiency
+			set {_enchant::33} to Silk Touch
+			set {_enchant::34} to Unbreaking
+			set {_enchant::35} to Fortune
+			set {_enchant::48} to Power
+			set {_enchant::49} to Punch
+			set {_enchant::50} to Flame
+			set {_enchant::51} to Infinity
+			set {_enchant::61} to Luck of the Sea
+			set {_enchant::62} to Lure
+			loop {_enchant::*}:
+				send "%loop-index% &7%loop-value%"
+		else if arg-1 is "add":
+			if arg-2 is set:
+				set {_arg3} to arg-3 parsed as number
+				if {_arg3} is set:
+					set {_enchant::0} to protection 
+					set {_enchant::1} to fire protection
+					set {_enchant::2} to feather falling
+					set {_enchant::3} to blast protection
+					set {_enchant::4} to projectile protection
+					set {_enchant::5} to respiration
+					set {_enchant::6} to aqua affinity
+					set {_enchant::7} to thorns
+					set {_enchant::8} to Depth Strider 
+					set {_enchant::9} to Frost Walker
+					set {_enchant::10} to Curse of Binding
+					set {_enchant::11} to Curse of Vanishing
+					set {_enchant::16} to Sharpness
+					set {_enchant::17} to Smite
+					set {_enchant::18} to Bane Of Arthropods
+					set {_enchant::19} to Knockback
+					set {_enchant::20} to Fire Aspect
+					set {_enchant::21} to Looting
+					set {_enchant::22} to Sweeping Edge
+					set {_enchant::32} to Efficiency
+					set {_enchant::33} to Silk Touch
+					set {_enchant::34} to Unbreaking
+					set {_enchant::35} to Fortune
+					set {_enchant::48} to Power
+					set {_enchant::49} to Punch
+					set {_enchant::50} to Flame
+					set {_enchant::51} to Infinity
+					set {_enchant::61} to Luck of the Sea
+					set {_enchant::62} to Lure
+					if {_enchant::%arg-2%} is set:
+						if player isn't holding air:
+							set {_el} to "%{_enchant::%arg-2%}% %{_arg3}%" parsed as enchantment type
+							enchant the player's tool with {_el}
+							send "&7[&d&lSKLORES&7] &a成功附魔!"
+						else:
+							send "&7[&d&lSKLORES&7] &c請手持一個物品!"
+					else:
+						send "&7[&d&lSKLORES&7] &c未找到此附魔!"
+				else:
+					send "&7[&d&lSKLORES&7] &c請輸入數字!"
+		
+command /sklores [<text>] [<text>] [<text>]:
+	Executable by: players
+	Permission: sklores.admin
+	permission message: &7[&d&lSKLORES&7] &c你沒權限使用此指令!
+	aliases: lo
+	trigger:
+		if arg-1 is not set:
+			send "&7----- &7[&d&lSKLORES&7]&7 ----- &eBY &6gundam89412"
+			send " &7/lo &d查看指令列表"
+			send " &7/setname [名稱] &d設置手上物品的名稱"
+			send " &7/loreadd [敘述] &d為手上物品添加一段敘述"
+			send " &7/lo check &d查看手上物品的所有敘述行數"
+			send " &7/lo set [行數] [敘述] &d更改某行的敘述"
+			send " &7/lo insert [行數] [敘述] &d插入某段敘述"
+			send " &7/lo del [行數] &d刪除某行敘述"
+			send " &7/lo clear &d刪除所有敘述"
+			send " &7/lo copy &d複製此武器的所有敘述"
+			send " &7/lo paste &d貼上複製的敘述"
+			send " &7/lo colors [顏色] &e更改皮革盔甲顏色"
+			send " &7/lo clist &e查看顏色代號列表"
+			send " &b/e add [附魔] [等級] &a添加一個附魔"
+			send " &b/e clear &a清空所有附魔"
+			send " &b/e list &a附魔id列表"
+			send "&7-----------------------------------------"
+
+		else if arg-1 is "colors":
+			set {_arg} to arg-2 parsed as color
+			if {_arg} is set:
+				if player's tool is leather helmet or chestplate or leggings or boots:
+					set {_arg} to arg-1 parsed as color
+					dye player's tool {_arg}
+					send "&7[&d&lSKLORES&7] &a成功更換護甲顏色"
+				else:
+					send "&7[&d&lSKLORES&7] &c請手持一個皮革護甲!"
+			else:
+				send "&7[&d&lSKLORES&7] &c請輸入正確的顏色代號!"
+		else if arg-1 is "clist":
+			send "&7[&d&lSKLORES&7] &f&l顏色代號列表"
+			send "黑: Black 藍: Blue         咖啡: Brown       亮藍: Light Blue 暗藍: Cyan 灰: Grey 暗灰: Dark Grey"
+			send "綠: Green 暗綠: dark Green 亮綠: Light Green 紫: Magenta      橘: Orange 粉紅: Pink"
+			send "紅: Red   白: White        黃: yellow        暗紫: Purple"
+		else if arg-1 is "check":
+			if player's tool is not air:
+				send "&f&l行數   敘述"
+				set {_Lore::*} to lore of player's tool split at "||"
+				loop {_Lore::*}:
+					send " %loop-index%  %{_Lore::%loop-index%}%"
+			else:
+				send "&7[&d&lSKLORES&7] &c請手持一個物品!"
+		else if arg-1 is "set":
+			set {_line} to arg-2 parsed as number
+			if {_line} is set:
+				if arg-3 is set:
+					if player's tool is not air:
+						set {_colors} to arg-3
+						replace all "&" with "§" in {_colors}
+						set line {_line} of player's tool lore to "%{_colors}%"
+						send "&7[&d&lSKLORES&7] &a成功更改第 %{_line}% 行敘述!" to player
+					else:
+						send "&7[&d&lSKLORES&7] &c請手持一個物品!"	
+				else:
+					send "&7[&d&lSKLORES&7] &c請輸入 [敘述]"
+			else:
+				send "&7[&d&lSKLORES&7] &c請輸入數字!"				
+		else if arg-1 is "insert":
+			set {_line} to arg-2 parsed as number
+			if {_line} is set:
+				if arg-3 is set:
+					if player's tool is not air:
+						set {_colors} to arg-3
+						replace all "&" with "§" in {_colors}
+						set {_line} to arg-2 parsed as integer
+						set {_Split} to line {_line} of lore of player's tool
+						set {_lore::*} to lore of player's tool split at "||%{_Split}%||"
+						set lore of player's tool to "%{_lore::1}%||%{_colors}%||%{_Split}%||%{_lore::2}%"	
+						send "&7[&d&lSKLORES&7] &a成功在第 %{_line}% 行插入敘述!"
+					else:
+						send "&7[&d&lSKLORES&7] &c請手持一個物品!"	
+				else:
+					send "&7[&d&lSKLORES&7] &c請輸入 [敘述]"
+			else:
+				send "&7[&d&lSKLORES&7] &c請輸入數字!"
+		else if arg-1 is "del":
+			set {_line} to arg-2 parsed as number
+			if {_line} is set:
+				if player's tool is not air:
+					delete line {_line} of lore of player's tool
+					send "&7[&d&lSKLORES&7] &a成功刪除第 %{_line}% 行敘述!"
+				else:
+					send "&7[&d&lSKLORES&7] &c請手持一個物品!"	
+			else:
+				send "&7[&d&lSKLORES&7] &c請輸入數字!"
+		else if arg-1 is "clear":
+			if player's tool is set:
+				set lore of player's tool to ""
+				delete line 1 of lore of player's tool
+				send "&7[&d&lSKLORES&7] &a成功清空所有敘述!" to player
+			else:
+				send "&7[&d&lSKLORES&7] &c請手持一個物品!"	
+		else if arg-1 is "copy":
+			if player's tool is set:
+				set {lore::%player%} to player's tool's lore 
+				send "&7[&d&lSKLORES&7] &a複製成功,請使用指令 &f/lo paste &a貼上敘述! &c在聊天窗輸入 &fno &c取消複製"
+			else:
+				send "&7[&d&lSKLORES&7] &c請手持一個物品!"	
+		else if arg-1 is "paste":
+			if player's tool is set:
+				if {lore::%player%} is set:
+					set lore of player's tool to "%{lore::%player%}%"
+					send "&7[&d&lSKLORES&7] &a成功貼上敘述!"
+					delete {lore::%player%}
+				else:
+					send "&7[&d&lSKLORES&7] &c請先複製敘述"
+			else:
+				send "&7[&d&lSKLORES&7] &c請手持一個物品!"
+on chat:
+	if {lore::%player%} is set:
+		if message is "no":
+			cancel event
+			delete {lore::%player%}
+			send "&7[&d&lSKLORES&7] &a成功取消複製!"
